@@ -276,7 +276,7 @@
         // Load and process data
         async function loadData() {
             try {
-                const response = await fetch('https://capacitychemical.sharepoint.com/sites/orders/Shared%20Documents/CS%20KPI%20Dashboard/NetSuite_KPI_Data.json');
+                const response = await fetch('NetSuite_KPI_Data.json');
                 
                 if (!response.ok) {
                     throw new Error('Failed to load data file');
