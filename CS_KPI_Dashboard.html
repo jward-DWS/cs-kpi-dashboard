@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Service KPI Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #0082CB 0%, #005A8C 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .header h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        
+        .last-updated {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 25px;
+            margin-bottom: 25px;
+        }
+        
+        .chart-container {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .chart-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #0082CB;
+        }
+        
+        .chart-wrapper {
+            position: relative;
+            height: 350px;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 50px;
+            color: #666;
+            font-size: 18px;
+        }
+        
+        .error {
+            background-color: #ffebee;
+            color: #c62828;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        
+        .stats-row {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 30px;
+            gap: 20px;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            flex: 1;
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 36px;
+            font-weight: bold;
+            color: #0082CB;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            font-size: 14px;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .date-filter-btn {
+            background: white;
+            border: 2px solid #0082CB;
+            color: #0082CB;
+            padding: 10px 20px;
+            margin: 0 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .date-filter-btn:hover {
+            background: #e6f4fb;
+        }
+        
+        .date-filter-btn.active {
+            background: #0082CB;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Customer Service KPI Dashboard</h1>
+        <div class="last-updated" id="lastUpdated">Loading...</div>
+    </div>
+
+    <!-- DATE FILTER BUTTONS -->
+    <div style="background: white; padding: 20px; border-radius: 10px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); text-align: center;">
+        <strong style="margin-right: 15px;">Date Range:</strong>
+        <button class="date-filter-btn" data-this-week="true">This Week</button>
+        <button class="date-filter-btn" data-this-month="true">This Month</button>
+        <button class="date-filter-btn active" data-weeks="6">Last 6 Weeks</button>
+        <button class="date-filter-btn" data-weeks="12">Last 12 Weeks</button>
+        <button class="date-filter-btn" data-months="3">Last 3 Months</button>
+        <button class="date-filter-btn" data-months="6">Last 6 Months</button>
+        <button class="date-filter-btn" data-all="true">All Time</button>
+    </div>
+    
+    <div class="stats-row">
+        <div class="stat-card">
+            <div class="stat-value" id="totalOrders">-</div>
+            <div class="stat-label">Total Orders</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value" id="onTimePercent">-</div>
+            <div class="stat-label">On-Time Delivery</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value" id="avgCompletion">-</div>
+            <div class="stat-label">Avg Completion (Days)</div>
+        </div>
+    </div>
+    
+    <div class="dashboard-grid">
+        <div class="chart-container">
+            <div class="chart-title">Order Completion Time - December 2025</div>
+            <div class="chart-wrapper">
+                <canvas id="completionChart"></canvas>
+            </div>
+        </div>
+        
+        <div class="chart-container">
+            <div class="chart-title">On-Time Delivery - December 2025</div>
+            <div class="chart-wrapper">
+                <canvas id="decemberDeliveryChart"></canvas>
+            </div>
+        </div>
+    </div>
+    
+    <div class="dashboard-grid">
+        <div class="chart-container" style="grid-column: 1 / -1;">
+            <div class="chart-title">On-Time Delivery Performance by Month - 2025</div>
+            <div class="chart-wrapper" style="height: 400px;">
+                <canvas id="monthlyDeliveryChart"></canvas>
+            </div>
+        </div>
+    </div>
+    
+    <div class="dashboard-grid">
+        <div class="chart-container" style="grid-column: 1 / -1;">
+            <div class="chart-title">Average Shipping Cost % by Week - 2025</div>
+            <div id="shippingCostWeekMessage" style="font-size: 12px; color: #666; margin-bottom: 10px; font-style: italic; display: none;"></div>
+            <div class="chart-wrapper" style="height: 400px;">
+                <canvas id="shippingCostByWeekChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <div class="dashboard-grid">
+        <div class="chart-container">
+            <div class="chart-title">Time to Order Entry - 2025</div>
+            <div id="orderEntryMessage" style="font-size: 12px; color: #666; margin-bottom: 10px; font-style: italic; display: none;"></div>
+            <div class="chart-wrapper">
+                <canvas id="orderEntryChart"></canvas>
+            </div>
+        </div>
+            
+        <div class="chart-container">
+            <div class="chart-title">Shipping Method Breakdown - 2025</div>
+            <div id="shippingMethodMessage" style="font-size: 12px; color: #666; margin-bottom: 10px; font-style: italic; display: none;"></div>
+            <div class="chart-wrapper">
+                <canvas id="shippingMethodChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <div class="dashboard-grid">
+        <div class="chart-container">
+            <div class="chart-title">Percent Shipping Cost Distribution - 2025</div>
+            <div id="shippingCostDistMessage" style="font-size: 12px; color: #666; margin-bottom: 10px; font-style: italic; display: none;"></div>
+            <div class="chart-wrapper">
+                <canvas id="shippingCostDistributionChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <div id="error" class="error" style="display: none;"></div>
+
+    <script>
+        // Global filter state
+        let currentFilter = { weeks: 6 }; // Default to 6 weeks
+        let allData = []; // Store all data globally
+        let chartInstances = {}; // Store chart instances for cleanup
+
+        function updateChartTitles() {
+            let dateRangeText = '';
+            
+            if (currentFilter.thisWeek) {
+                dateRangeText = 'This Week';
+            } else if (currentFilter.thisMonth) {
+                dateRangeText = 'This Month';
+            } else if (currentFilter.weeks) {
+                dateRangeText = `Last ${currentFilter.weeks} Weeks`;
+            } else if (currentFilter.months) {
+                dateRangeText = `Last ${currentFilter.months} Months`;
+            } else if (currentFilter.all) {
+                dateRangeText = 'All Time';
+            }
+            
+            // Update all chart titles
+            const chartTitles = document.querySelectorAll('.chart-title');
+            
+            chartTitles[0].textContent = `Order Completion Time - ${dateRangeText}`;
+            chartTitles[1].textContent = `On-Time Delivery - ${dateRangeText}`;
+            chartTitles[2].textContent = `On-Time Delivery Performance by Month - ${dateRangeText}`;
+            chartTitles[3].textContent = `Average Shipping Cost % by Week - ${dateRangeText}`;
+            chartTitles[4].textContent = `Time to Order Entry - ${dateRangeText}`;
+            chartTitles[5].textContent = `Shipping Method Breakdown - ${dateRangeText}`;
+            chartTitles[6].textContent = `Percent Shipping Cost Distribution - ${dateRangeText}`;
+        }
+
+        // Brand colors
+        const COLORS = {
+            blue: '#0082CB',
+            orange: '#F37021',
+            gray: '#E5E6E6',
+            green: '#4CAF50',
+            red: '#f44336'
+        };
+        
+        // Load and process data
+        async function loadData() {
+            try {
+                const response = await fetch('https://capacitychemical.sharepoint.com/sites/orders/Shared%20Documents/CS%20KPI%20Dashboard/NetSuite_KPI_Data.json');
+                
+                if (!response.ok) {
+                    throw new Error('Failed to load data file');
+                }
+                
+                const jsonData = await response.json();
+                
+                // Update last updated time
+                document.getElementById('lastUpdated').textContent = 
+                    `Last Updated: ${jsonData.metadata.last_updated}`;
+                
+                // Process and display data
+                processData(jsonData.data);
+                
+            } catch (error) {
+                console.error('Error loading data:', error);
+                document.getElementById('error').style.display = 'block';
+                document.getElementById('error').textContent = 
+                    'Error loading data. Make sure NetSuite_KPI_Data.json is in the same folder as this HTML file.';
+            }
+        }
+
+        function filterDataByDateRange(data) {
+            if (currentFilter.all) {
+                return data;
+            }
+            
+            const now = new Date();
+            let cutoffDate;
+            
+            if (currentFilter.thisWeek) {
+                // Get the start of this week (Sunday)
+                cutoffDate = new Date(now);
+                cutoffDate.setDate(cutoffDate.getDate() - cutoffDate.getDay());
+                cutoffDate.setHours(0, 0, 0, 0);
+            } else if (currentFilter.thisMonth) {
+                // Get the start of this month
+                cutoffDate = new Date(now.getFullYear(), now.getMonth(), 1);
+            } else if (currentFilter.weeks) {
+                cutoffDate = new Date(now.getTime() - (currentFilter.weeks * 7 * 24 * 60 * 60 * 1000));
+            } else if (currentFilter.months) {
+                cutoffDate = new Date(now);
+                cutoffDate.setMonth(cutoffDate.getMonth() - currentFilter.months);
+            }
+            
+            return data.filter(order => {
+                if (!order.actual_ship_date) return false;
+                const shipDate = new Date(order.actual_ship_date);
+                return shipDate >= cutoffDate;
+            });
+        }
+        
+        function processData(data) {
+            allData = data;
+            const filteredData = filterDataByDateRange(data);
+            
+            const ordersWithShipDate = filteredData.filter(d => d.actual_ship_date);
+            const onTimeOrders = ordersWithShipDate.filter(d => d.on_time_delivery === 'On Time');
+            const onTimePercent = ordersWithShipDate.length > 0 
+                ? Math.round((onTimeOrders.length / ordersWithShipDate.length) * 100) 
+                : 0;
+            
+            const ordersWithCompletion = filteredData.filter(d => 
+                d.transaction_date && d.actual_ship_date
+            );
+            
+            let totalDays = 0;
+            ordersWithCompletion.forEach(order => {
+                const transDate = new Date(order.transaction_date);
+                const shipDate = new Date(order.actual_ship_date);
+                const days = Math.round((shipDate - transDate) / (1000 * 60 * 60 * 24));
+                totalDays += days;
+            });
+            
+            const avgCompletion = ordersWithCompletion.length > 0 
+                ? (totalDays / ordersWithCompletion.length).toFixed(1) 
+                : 0;
+            
+            document.getElementById('totalOrders').textContent = filteredData.length;
+            document.getElementById('onTimePercent').textContent = onTimePercent + '%';
+            document.getElementById('avgCompletion').textContent = avgCompletion;
+            
+            createCompletionChart(ordersWithCompletion);
+            createDecemberDeliveryChart(filteredData);
+            createMonthlyDeliveryChart(filteredData);
+            createShippingCostByWeekChart(filteredData);
+            createOrderEntryChart(filteredData);
+            createShippingMethodChart(filteredData);
+            createShippingCostDistributionChart(filteredData);
+
+            updateChartTitles();
+        }
+        
+        function createCompletionChart(orders) {
+            if (chartInstances.completionChart) {
+                chartInstances.completionChart.destroy();
+            }
+            
+            // No more hard-coded December 2025 filter - just use whatever orders were passed in
+            let under3Days = 0;
+            let days4to5 = 0;
+            let over5Days = 0;
+            
+            orders.forEach(order => {
+                const transDate = new Date(order.transaction_date);
+                const shipDate = new Date(order.actual_ship_date);
+                const days = Math.round((shipDate - transDate) / (1000 * 60 * 60 * 24));
+                
+                if (days <= 3) under3Days++;
+                else if (days <= 5) days4to5++;
+                else over5Days++;
+            });
+            
+            const ctx = document.getElementById('completionChart').getContext('2d');
+            chartInstances.completionChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['≤ 3 days', '4-5 days', '> 5 days'],
+                    datasets: [{
+                        label: 'Number of Orders',
+                        data: [under3Days, days4to5, over5Days],
+                        backgroundColor: [COLORS.blue, COLORS.blue, COLORS.blue],
+                        borderRadius: 5
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                afterLabel: function(context) {
+                                    const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                    const percent = ((context.parsed.y / total) * 100).toFixed(1);
+                                    return `${percent}% of orders`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: { precision: 0 }
+                        }
+                    }
+                }
+            });
+        }
+        
+        function createDecemberDeliveryChart(data) {
+            if (chartInstances.decemberDeliveryChart) {
+                chartInstances.decemberDeliveryChart.destroy();
+            }
+            
+            // No more hard-coded December 2025 filter - use the filtered data
+            const onTime = data.filter(o => o.on_time_delivery === 'On Time').length;
+            const late = data.filter(o => o.on_time_delivery === 'Late').length;
+            
+            const ctx = document.getElementById('decemberDeliveryChart').getContext('2d');
+            chartInstances.decemberDeliveryChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Delivered On Time', 'Delivered Late'],
+                    datasets: [{
+                        label: 'Orders',
+                        data: [onTime, late],
+                        backgroundColor: [COLORS.blue, COLORS.orange],
+                        borderRadius: 5
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                afterLabel: function(context) {
+                                    const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                    const percent = ((context.parsed.y / total) * 100).toFixed(1);
+                                    return `${percent}%`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: { precision: 0 }
+                        }
+                    }
+                }
+            });
+        }
+        
+        function createMonthlyDeliveryChart(data) {
+            if (chartInstances.monthlyDeliveryChart) {
+                chartInstances.monthlyDeliveryChart.destroy();
+            }
+            
+            const monthlyData = {};
+            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 
+                        'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            
+            // Process the filtered data with YEAR-MONTH keys
+            data.forEach(order => {
+                if (!order.actual_ship_date) return;
+                
+                const date = new Date(order.actual_ship_date);
+                const year = date.getFullYear();
+                const month = months[date.getMonth()];
+                const key = `${month} ${year}`; // e.g., "Jan 2025"
+                
+                if (!monthlyData[key]) {
+                    monthlyData[key] = { 
+                        onTime: 0, 
+                        late: 0,
+                        sortDate: new Date(year, date.getMonth(), 1) // For sorting
+                    };
+                }
+                
+                if (order.on_time_delivery === 'On Time') {
+                    monthlyData[key].onTime++;
+                } else if (order.on_time_delivery === 'Late') {
+                    monthlyData[key].late++;
+                }
+            });
+            
+            // Sort by date chronologically
+            const sortedKeys = Object.keys(monthlyData).sort((a, b) => {
+                return monthlyData[a].sortDate - monthlyData[b].sortDate;
+            });
+            
+            const labels = sortedKeys;
+            const onTimeData = sortedKeys.map(key => monthlyData[key].onTime);
+            const lateData = sortedKeys.map(key => monthlyData[key].late);
+            
+            const ctx = document.getElementById('monthlyDeliveryChart').getContext('2d');
+            chartInstances.monthlyDeliveryChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Delivered On Time',
+                            data: onTimeData,
+                            backgroundColor: COLORS.blue,
+                            borderRadius: 5
+                        },
+                        {
+                            label: 'Delivered Late',
+                            data: lateData,
+                            backgroundColor: COLORS.orange,
+                            borderRadius: 5
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                font: { size: 14 },
+                                padding: 15
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                footer: function(items) {
+                                    const index = items[0].dataIndex;
+                                    const total = onTimeData[index] + lateData[index];
+                                    const onTimePct = total > 0 
+                                        ? ((onTimeData[index] / total) * 100).toFixed(1) 
+                                        : 0;
+                                    return `On-Time: ${onTimePct}%`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            stacked: true,
+                            grid: { display: false }
+                        },
+                        y: {
+                            stacked: true,
+                            beginAtZero: true,
+                            ticks: { precision: 0 }
+                        }
+                    }
+                }
+            });
+        }
+
+        function createShippingCostByWeekChart(data) {
+            if (chartInstances.shippingCostByWeekChart) {
+                chartInstances.shippingCostByWeekChart.destroy();
+            }
+            
+            const shippedOrders = data.filter(order => 
+                order.actual_ship_date && 
+                order.percent_shipping_cost != null && 
+                order.percent_shipping_cost > 0
+            );
+            
+            // ADD MESSAGE
+            const messageDiv = document.getElementById('shippingCostWeekMessage');
+            const totalOrders = data.filter(d => d.actual_ship_date).length;
+            if (shippedOrders.length < totalOrders) {
+                messageDiv.textContent = `Based on ${shippedOrders.length} orders with shipping costs (out of ${totalOrders} total orders)`;
+                messageDiv.style.display = 'block';
+            } else {
+                messageDiv.style.display = 'none';
+            }
+            
+            const weeklyData = {};
+            
+            // Process all filtered data with YEAR-WEEK keys
+            shippedOrders.forEach(order => {
+                const date = new Date(order.actual_ship_date);
+                const year = date.getFullYear();
+                const weekNum = getWeekNumber(date);
+                const weekLabel = `Week ${weekNum} ${year}`; // e.g., "Week 5 2025"
+                
+                if (!weeklyData[weekLabel]) {
+                    weeklyData[weekLabel] = {
+                        total: 0,
+                        count: 0,
+                        sortDate: date // For sorting
+                    };
+                }
+                
+                weeklyData[weekLabel].total += parseFloat(order.percent_shipping_cost);
+                weeklyData[weekLabel].count += 1;
+            });
+            
+            // Sort by date chronologically
+            const weeks = Object.keys(weeklyData).sort((a, b) => {
+                return weeklyData[a].sortDate - weeklyData[b].sortDate;
+            });
+            
+            const averages = weeks.map(week => {
+                const data = weeklyData[week];
+                return (data.total / data.count).toFixed(2);
+            });
+            
+            const ctx = document.getElementById('shippingCostByWeekChart').getContext('2d');
+            chartInstances.shippingCostByWeekChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: weeks,
+                    datasets: [{
+                        label: 'Avg Shipping Cost %',
+                        data: averages,
+                        backgroundColor: COLORS.orange,
+                        borderRadius: 5
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                font: { size: 14 },
+                                padding: 15
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `Average: ${context.parsed.y}%`;
+                                },
+                                afterLabel: function(context) {
+                                    const week = context.label;
+                                    const count = weeklyData[week].count;
+                                    return `${count} orders`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Shipping Cost %'
+                            },
+                            ticks: {
+                                callback: function(value) {
+                                    return value + '%';
+                                }
+                            }
+                        },
+                        x: {
+                            grid: { display: false }
+                        }
+                    }
+                }
+            });
+        }
+
+        function getWeekNumber(date) {
+            const d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
+            const dayNum = d.getUTCDay() || 7;
+            d.setUTCDate(d.getUTCDate() + 4 - dayNum);
+            const yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
+            return Math.ceil((((d - yearStart) / 86400000) + 1) / 7);
+        }
+
+        function createOrderEntryChart(data) {
+            if (chartInstances.orderEntryChart) {
+                chartInstances.orderEntryChart.destroy();
+            }
+            
+            // Use all filtered data
+            const ordersWithData = data.filter(order => 
+                order.po_received_date && 
+                order.transaction_date
+            );
+
+            const messageDiv = document.getElementById('orderEntryMessage');
+            const totalOrders = data.filter(d => d.actual_ship_date).length;
+            if (ordersWithData.length < totalOrders) {
+                messageDiv.textContent = `Based on ${ordersWithData.length} orders with PO received date (out of ${totalOrders} total orders)`;
+                messageDiv.style.display = 'block';
+            } else {
+                messageDiv.style.display = 'none';
+            }
+            
+            let day1OrLess = 0;
+            let days2to3 = 0;
+            let days4to5 = 0;
+            let over5Days = 0;
+            
+            ordersWithData.forEach(order => {
+                const poDate = new Date(order.po_received_date);
+                const transDate = new Date(order.transaction_date);
+                const days = Math.round((transDate - poDate) / (1000 * 60 * 60 * 24));
+                
+                if (days <= 1) day1OrLess++;
+                else if (days <= 3) days2to3++;
+                else if (days <= 5) days4to5++;
+                else over5Days++;
+            });
+            
+            const ctx = document.getElementById('orderEntryChart').getContext('2d');
+            chartInstances.orderEntryChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['≤ 1 day', '2-3 days', '4-5 days', '> 5 days'],
+                    datasets: [{
+                        label: 'Number of Orders',
+                        data: [day1OrLess, days2to3, days4to5, over5Days],
+                        backgroundColor: [COLORS.blue, COLORS.blue, COLORS.blue, COLORS.blue],
+                        borderRadius: 5
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                afterLabel: function(context) {
+                                    const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                    const percent = ((context.parsed.y / total) * 100).toFixed(1);
+                                    return `${percent}% of orders`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: { precision: 0 },
+                            title: {
+                                display: true,
+                                text: 'Number of Orders'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function createShippingMethodChart(data) {
+            if (chartInstances.shippingMethodChart) {
+                chartInstances.shippingMethodChart.destroy();
+            }
+            
+            // No more year restriction - use all filtered data
+            const shippedOrders = data.filter(order => {
+                return order.actual_ship_date && order.shipping_method_name;
+            });
+            
+            const methodCounts = {};
+            shippedOrders.forEach(order => {
+                const method = order.shipping_method_name;
+                methodCounts[method] = (methodCounts[method] || 0) + 1;
+            });
+            
+            const sortedMethods = Object.entries(methodCounts)
+                .sort((a, b) => b[1] - a[1]);
+            
+            const labels = sortedMethods.map(([method]) => method);
+            const counts = sortedMethods.map(([, count]) => count);
+            
+            const backgroundColors = [
+                COLORS.blue,      // Blue
+                COLORS.orange,    // Orange
+                '#4CAF50',        // Green
+                '#9C27B0',        // Purple
+                '#FF9800',        // Deep Orange
+                '#00BCD4',        // Cyan
+                '#E91E63',        // Pink
+                '#795548',        // Brown
+                '#607D8B',        // Blue Grey
+                '#FFC107',        // Amber
+                '#8BC34A',        // Light Green
+                '#673AB7',        // Deep Purple
+                '#009688',        // Teal
+                '#FF5722',        // Red Orange
+                '#3F51B5',        // Indigo
+                '#CDDC39',        // Lime
+                '#00ACC1',        // Dark Cyan
+                '#F06292',        // Light Pink
+                '#9E9D24',        // Olive
+                '#5D4037'         // Dark Brown
+            ];
+            
+            const ctx = document.getElementById('shippingMethodChart').getContext('2d');
+            chartInstances.shippingMethodChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        data: counts,
+                        backgroundColor: backgroundColors.slice(0, labels.length),
+                        borderWidth: 2,
+                        borderColor: '#fff'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'right',
+                            labels: {
+                                font: { size: 12 },
+                                padding: 10,
+                                generateLabels: function(chart) {
+                                    const data = chart.data;
+                                    const total = data.datasets[0].data.reduce((a, b) => a + b, 0);
+                                    return data.labels.map((label, i) => {
+                                        const value = data.datasets[0].data[i];
+                                        const percentage = ((value / total) * 100).toFixed(1);
+                                        return {
+                                            text: `${label}: ${value} (${percentage}%)`,
+                                            fillStyle: data.datasets[0].backgroundColor[i],
+                                            hidden: false,
+                                            index: i
+                                        };
+                                    });
+                                }
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const label = context.label || '';
+                                    const value = context.parsed;
+                                    const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                    const percentage = ((value / total) * 100).toFixed(1);
+                                    return `${label}: ${value} orders (${percentage}%)`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function createShippingCostDistributionChart(data) {
+            if (chartInstances.shippingCostDistributionChart) {
+                chartInstances.shippingCostDistributionChart.destroy();
+            }
+            
+            // No more year restriction - use all filtered data
+            const ordersWithShipping = data.filter(order => {
+                return order.actual_ship_date && order.percent_shipping_cost != null;
+            });
+
+            const messageDiv = document.getElementById('shippingCostDistMessage');
+            const totalOrders = data.filter(d => d.actual_ship_date).length;
+            const ordersWithCost = ordersWithShipping.filter(o => o.percent_shipping_cost > 0).length;
+            if (ordersWithCost < totalOrders) {
+                messageDiv.textContent = `Based on ${ordersWithCost} orders with shipping costs (out of ${totalOrders} total orders)`;
+                messageDiv.style.display = 'block';
+            } else {
+                messageDiv.style.display = 'none';
+            }
+            
+            let range0to5 = 0;
+            let range5to10 = 0;
+            let range10to15 = 0;
+            let range15to20 = 0;
+            let range20plus = 0;
+            
+            ordersWithShipping.forEach(order => {
+                const percent = parseFloat(order.percent_shipping_cost);
+                
+                if (percent < 5) range0to5++;
+                else if (percent < 10) range5to10++;
+                else if (percent < 15) range10to15++;
+                else if (percent < 20) range15to20++;
+                else range20plus++;
+            });
+            
+            const ctx = document.getElementById('shippingCostDistributionChart').getContext('2d');
+            chartInstances.shippingCostDistributionChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['0-5%', '5-10%', '10-15%', '15-20%', '20%+'],
+                    datasets: [{
+                        label: 'Number of Orders',
+                        data: [range0to5, range5to10, range10to15, range15to20, range20plus],
+                        backgroundColor: [COLORS.blue, COLORS.blue, COLORS.blue, COLORS.orange, COLORS.orange],
+                        borderRadius: 5
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                afterLabel: function(context) {
+                                    const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                    const percent = ((context.parsed.y / total) * 100).toFixed(1);
+                                    return `${percent}% of orders`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: { precision: 0 },
+                            title: {
+                                display: true,
+                                text: 'Number of Orders'
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Shipping Cost as % of Order Total'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Date filter button handlers
+       document.querySelectorAll('.date-filter-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                document.querySelectorAll('.date-filter-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                
+                this.classList.add('active');
+                
+                if (this.dataset.thisWeek) {
+                    currentFilter = { thisWeek: true };
+                } else if (this.dataset.thisMonth) {
+                    currentFilter = { thisMonth: true };
+                } else if (this.dataset.weeks) {
+                    currentFilter = { weeks: parseInt(this.dataset.weeks) };
+                } else if (this.dataset.months) {
+                    currentFilter = { months: parseInt(this.dataset.months) };
+                } else if (this.dataset.all) {
+                    currentFilter = { all: true };
+                }
+                
+                processData(allData);
+                updateChartTitles();
+            });
+        });
+        
+        // Load data when page loads
+        window.addEventListener('load', loadData);
+    </script>
+</body>
+</html>
