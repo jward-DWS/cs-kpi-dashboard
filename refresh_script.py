@@ -34,9 +34,9 @@ SELECT
     TO_CHAR(t.shipdate, 'YYYY-MM-DD') AS target_ship_date,
     TO_CHAR(t.actualshipdate, 'YYYY-MM-DD') AS actual_ship_date,
     sm.itemid AS shipping_method_name,
-    t.shippingcost AS shipping_cost,
+    0 AS shipping_cost,
     t.total AS order_total,
-    CASE WHEN t.custbody_on_hold = 'T' THEN 'Yes' ELSE 'No' END AS on_hold_status
+    CASE WHEN t.custbody_on_hold_status = 'T' THEN 'Yes' ELSE 'No' END AS on_hold_status
 FROM transaction t
 LEFT JOIN customer c ON t.entity = c.id
 LEFT JOIN item sm ON t.shipmethod = sm.id
