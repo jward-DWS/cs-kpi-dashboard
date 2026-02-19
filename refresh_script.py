@@ -22,7 +22,7 @@ SUITEQL_URL = f"{BASE_URL}/services/rest/query/v1/suiteql"
 
 print(f"Connecting to NetSuite account: {NETSUITE_ACCOUNT_ID}")
 
-# SuiteQL Query
+# SuiteQL Query - USING YOUR WORKING QUERY!
 SUITEQL_QUERY = """
 SELECT 
     t.id AS transaction_id,
@@ -34,18 +34,12 @@ SELECT
     TO_CHAR(t.shipdate, 'YYYY-MM-DD') AS target_ship_date,
     TO_CHAR(t.actualshipdate, 'YYYY-MM-DD') AS actual_ship_date,
     sm.itemid AS shipping_method_name,
+    t.shippingcost AS shipping_cost,
     t.total AS order_total,
-    CASE WHEN t.custbody_on_hold_status = 'T' THEN 'Yes' ELSE 'No' END AS on_hold_status,
-    (SELECT SUM(ABS(ship_line.amount))
-     FROM transactionline ship_line
-     INNER JOIN transaction ship_txn ON ship_line.transaction = ship_txn.id
-     WHERE ship_txn.type = 'ItemShip'
-     AND ship_line.mainline = 'F'
-     AND ship_line.item = 2077
-     AND ship_txn.createdFrom = t.id) AS shipping_cost
+    CASE WHEN t.custbody_on_hold = 'T' THEN 'Yes' ELSE 'No' END AS on_hold_status
 FROM transaction t
 LEFT JOIN customer c ON t.entity = c.id
-LEFT JOIN shipitem sm ON t.shipmethod = sm.id
+LEFT JOIN item sm ON t.shipmethod = sm.id
 WHERE t.type = 'SalesOrd'
 AND t.trandate >= TO_DATE('2024-01-01', 'YYYY-MM-DD')
 ORDER BY t.trandate DESC
