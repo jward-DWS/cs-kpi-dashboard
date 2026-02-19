@@ -1,5 +1,8 @@
 name: Refresh NetSuite KPI Data
 
+permissions:
+  contents: write
+
 on:
   schedule:
     # Runs every day at 8:00 AM UTC (adjust timezone as needed)
