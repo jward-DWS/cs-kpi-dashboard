@@ -42,7 +42,7 @@ SELECT
      WHERE ship_txn.type = 'ItemShip'
      AND ship_line.mainline = 'F'
      AND ship_line.item = 2077
-     AND ship_txn.createdfrom = t.id) AS shipping_cost
+     AND ship_txn.createdFrom = t.id) AS shipping_cost
 FROM transaction t
 LEFT JOIN customer c ON t.entity = c.id
 LEFT JOIN shipitem sm ON t.shipmethod = sm.id
