@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2026-02-20 00:00:54",
+    "last_updated": "2026-02-20 10:04:26",
     "record_count": 1000
   },
   "data": [
@@ -65,6 +65,23 @@
       "target_ship_date": "2026-02-26",
       "transaction_date": "2026-02-19",
       "transaction_id": "741445",
+      "days_order_entry": null,
+      "days_order_confirmation": null,
+      "days_fulfillment": null,
+      "days_late_early": null,
+      "on_time_delivery": "Pending",
+      "percent_shipping_cost": 0.0
+    },
+    {
+      "links": [],
+      "customer_name": "Chemi-Gal Cleaning Products LLC",
+      "on_hold_status": "No",
+      "order_total": "429.2",
+      "sales_order_number": "SO5650",
+      "shipping_cost": "0",
+      "target_ship_date": "2026-02-26",
+      "transaction_date": "2026-02-19",
+      "transaction_id": "741683",
       "days_order_entry": null,
       "days_order_confirmation": null,
       "days_fulfillment": null,
@@ -17914,24 +17931,6 @@
       "days_order_confirmation": null,
       "days_fulfillment": null,
       "days_late_early": -1,
-      "on_time_delivery": "On Time",
-      "percent_shipping_cost": 0.0
-    },
-    {
-      "links": [],
-      "actual_ship_date": "2025-10-08",
-      "customer_name": "California Soda Co.",
-      "on_hold_status": "No",
-      "order_total": "600",
-      "sales_order_number": "SO4616",
-      "shipping_cost": "0",
-      "target_ship_date": "2025-10-08",
-      "transaction_date": "2025-10-03",
-      "transaction_id": "625836",
-      "days_order_entry": null,
-      "days_order_confirmation": null,
-      "days_fulfillment": null,
-      "days_late_early": 0,
       "on_time_delivery": "On Time",
       "percent_shipping_cost": 0.0
     }
