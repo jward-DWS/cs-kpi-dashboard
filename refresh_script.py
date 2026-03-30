@@ -27,7 +27,6 @@ SUITEQL_QUERY = """
 SELECT 
     t.id AS transaction_id,
     t.tranid AS sales_order_number,
-    c.companyname AS customer_name,
     TO_CHAR(t.trandate, 'YYYY-MM-DD') AS transaction_date,
     TO_CHAR(t.custbody_po_received_date, 'YYYY-MM-DD') AS po_received_date,
     TO_CHAR(t.custbody_order_confirmed_date, 'YYYY-MM-DD') AS order_confirmed_date,
@@ -42,7 +41,6 @@ SELECT
      AND ship_line.item = 2077
      AND ship_line.mainline = 'F') AS shipping_cost
 FROM transaction t
-LEFT JOIN customer c ON t.entity = c.id
 LEFT JOIN shipitem sm ON t.shipmethod = sm.id
 WHERE t.type = 'SalesOrd'
 AND t.trandate >= TO_DATE('2024-01-01', 'YYYY-MM-DD')
