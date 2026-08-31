@@ -1,9 +1,42 @@
 {
   "metadata": {
-    "last_updated": "2026-08-30 13:41:47",
+    "last_updated": "2026-08-31 16:00:38",
     "record_count": 1000
   },
   "data": [
+    {
+      "links": [],
+      "on_hold_status": "No",
+      "order_total": "640.2",
+      "sales_order_number": "SO7647",
+      "shipping_method_name": "Will Call",
+      "target_ship_date": "2026-09-11",
+      "transaction_date": "2026-08-31",
+      "transaction_id": "924514",
+      "days_order_entry": null,
+      "days_order_confirmation": null,
+      "days_fulfillment": null,
+      "days_late_early": null,
+      "on_time_delivery": "Pending",
+      "percent_shipping_cost": 0.0
+    },
+    {
+      "links": [],
+      "on_hold_status": "No",
+      "order_total": "12726.21",
+      "po_received_date": "2026-08-31",
+      "sales_order_number": "SO7646",
+      "shipping_method_name": "CC Truck",
+      "target_ship_date": "2026-08-31",
+      "transaction_date": "2026-08-31",
+      "transaction_id": "924513",
+      "days_order_entry": 0,
+      "days_order_confirmation": null,
+      "days_fulfillment": null,
+      "days_late_early": null,
+      "on_time_delivery": "Pending",
+      "percent_shipping_cost": 0.0
+    },
     {
       "links": [],
       "on_hold_status": "No",
@@ -58,8 +91,9 @@
     {
       "links": [],
       "on_hold_status": "No",
-      "order_total": "11427.12",
+      "order_total": "12556.56",
       "sales_order_number": "SO7644",
+      "shipping_method_name": "CC Truck",
       "target_ship_date": "2026-09-11",
       "transaction_date": "2026-08-28",
       "transaction_id": "923991",
@@ -139,7 +173,7 @@
     {
       "links": [],
       "on_hold_status": "No",
-      "order_total": "4529.75",
+      "order_total": "4529.77",
       "sales_order_number": "SO7638",
       "shipping_method_name": "Central Transport-PPA",
       "target_ship_date": "2026-09-14",
@@ -173,7 +207,7 @@
       "on_hold_status": "No",
       "order_total": "2593.8",
       "sales_order_number": "SO7643",
-      "shipping_method_name": "Customer Carrier",
+      "shipping_method_name": "CC Truck",
       "target_ship_date": "2026-09-02",
       "transaction_date": "2026-08-28",
       "transaction_id": "923989",
@@ -221,10 +255,10 @@
     {
       "links": [],
       "on_hold_status": "No",
-      "order_total": "6324.64",
+      "order_total": "6076.42",
       "sales_order_number": "SO7645",
-      "shipping_method_name": "CC Truck",
-      "target_ship_date": "2026-09-04",
+      "shipping_method_name": "XPO",
+      "target_ship_date": "2026-09-09",
       "transaction_date": "2026-08-28",
       "transaction_id": "923992",
       "days_order_entry": null,
@@ -1156,6 +1190,7 @@
     },
     {
       "links": [],
+      "actual_ship_date": "2026-08-31",
       "on_hold_status": "No",
       "order_total": "7838.25",
       "sales_order_number": "SO7580",
@@ -1166,8 +1201,8 @@
       "days_order_entry": null,
       "days_order_confirmation": null,
       "days_fulfillment": null,
-      "days_late_early": null,
-      "on_time_delivery": "Pending",
+      "days_late_early": 0,
+      "on_time_delivery": "On Time",
       "percent_shipping_cost": 0.0
     },
     {
@@ -3195,6 +3230,7 @@
     },
     {
       "links": [],
+      "actual_ship_date": "2026-08-31",
       "on_hold_status": "No",
       "order_total": "2844.06",
       "sales_order_number": "SO7457",
@@ -3205,8 +3241,8 @@
       "days_order_entry": null,
       "days_order_confirmation": null,
       "days_fulfillment": null,
-      "days_late_early": null,
-      "on_time_delivery": "Pending",
+      "days_late_early": 6,
+      "on_time_delivery": "Late",
       "percent_shipping_cost": 0.0
     },
     {
@@ -5155,10 +5191,10 @@
     {
       "links": [],
       "on_hold_status": "No",
-      "order_total": "41790",
+      "order_total": "44990",
       "po_received_date": "2026-07-29",
       "sales_order_number": "SO7334",
-      "shipping_method_name": "Customer Carrier",
+      "shipping_method_name": "Hawkeye PPA",
       "target_ship_date": "2026-08-31",
       "transaction_date": "2026-07-29",
       "transaction_id": "895731",
@@ -17602,42 +17638,6 @@
       "days_order_confirmation": null,
       "days_fulfillment": null,
       "days_late_early": 6,
-      "on_time_delivery": "Late",
-      "percent_shipping_cost": 0.0
-    },
-    {
-      "links": [],
-      "actual_ship_date": "2026-05-19",
-      "on_hold_status": "No",
-      "order_total": "702.2",
-      "po_received_date": "2026-05-19",
-      "sales_order_number": "SO6599",
-      "shipping_method_name": "Will Call",
-      "target_ship_date": "2026-05-19",
-      "transaction_date": "2026-05-19",
-      "transaction_id": "819715",
-      "days_order_entry": 0,
-      "days_order_confirmation": null,
-      "days_fulfillment": null,
-      "days_late_early": 0,
-      "on_time_delivery": "On Time",
-      "percent_shipping_cost": 0.0
-    },
-    {
-      "links": [],
-      "actual_ship_date": "2026-06-02",
-      "on_hold_status": "No",
-      "order_total": "236.25",
-      "po_received_date": "2026-05-18",
-      "sales_order_number": "SO6598",
-      "shipping_method_name": "GI Drayage-3rd",
-      "target_ship_date": "2026-05-26",
-      "transaction_date": "2026-05-19",
-      "transaction_id": "819608",
-      "days_order_entry": 1,
-      "days_order_confirmation": null,
-      "days_fulfillment": null,
-      "days_late_early": 7,
       "on_time_delivery": "Late",
       "percent_shipping_cost": 0.0
     }
