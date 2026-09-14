@@ -1,9 +1,26 @@
 {
   "metadata": {
-    "last_updated": "2026-09-13 13:12:50",
+    "last_updated": "2026-09-14 14:53:24",
     "record_count": 1000
   },
   "data": [
+    {
+      "links": [],
+      "on_hold_status": "No",
+      "order_total": "920",
+      "po_received_date": "2026-09-14",
+      "sales_order_number": "SO7754",
+      "shipping_method_name": "CC Truck",
+      "target_ship_date": "2026-09-14",
+      "transaction_date": "2026-09-14",
+      "transaction_id": "936435",
+      "days_order_entry": 0,
+      "days_order_confirmation": null,
+      "days_fulfillment": null,
+      "days_late_early": null,
+      "on_time_delivery": "Pending",
+      "percent_shipping_cost": 0.0
+    },
     {
       "links": [],
       "on_hold_status": "No",
@@ -331,11 +348,11 @@
     {
       "links": [],
       "on_hold_status": "No",
-      "order_total": "521.05",
+      "order_total": "571.05",
       "po_received_date": "2026-09-10",
       "sales_order_number": "SO7735",
-      "shipping_method_name": "Will Call",
-      "target_ship_date": "2026-09-24",
+      "shipping_method_name": "CC Truck",
+      "target_ship_date": "2026-09-14",
       "transaction_date": "2026-09-10",
       "transaction_id": "934765",
       "days_order_entry": 0,
@@ -1767,6 +1784,7 @@
     },
     {
       "links": [],
+      "actual_ship_date": "2026-09-14",
       "on_hold_status": "No",
       "order_total": "19811.08",
       "po_received_date": "2026-08-28",
@@ -1778,8 +1796,8 @@
       "days_order_entry": 0,
       "days_order_confirmation": null,
       "days_fulfillment": null,
-      "days_late_early": null,
-      "on_time_delivery": "Pending",
+      "days_late_early": -1,
+      "on_time_delivery": "On Time",
       "percent_shipping_cost": 0.0
     },
     {
@@ -17559,24 +17577,6 @@
       "days_order_confirmation": null,
       "days_fulfillment": null,
       "days_late_early": 2,
-      "on_time_delivery": "Late",
-      "percent_shipping_cost": 0.0
-    },
-    {
-      "links": [],
-      "actual_ship_date": "2026-06-29",
-      "on_hold_status": "No",
-      "order_total": "33600",
-      "po_received_date": "2026-05-22",
-      "sales_order_number": "SO6728",
-      "shipping_method_name": "Will Call",
-      "target_ship_date": "2026-06-08",
-      "transaction_date": "2026-05-29",
-      "transaction_id": "828863",
-      "days_order_entry": 7,
-      "days_order_confirmation": null,
-      "days_fulfillment": null,
-      "days_late_early": 21,
       "on_time_delivery": "Late",
       "percent_shipping_cost": 0.0
     }
