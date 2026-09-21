@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2026-09-20 12:57:46",
+    "last_updated": "2026-09-21 14:58:21",
     "record_count": 1000
   },
   "data": [
@@ -10185,6 +10185,7 @@
     },
     {
       "links": [],
+      "actual_ship_date": "2026-07-14",
       "on_hold_status": "No",
       "order_total": "315",
       "po_received_date": "2026-07-13",
@@ -10196,8 +10197,8 @@
       "days_order_entry": 1,
       "days_order_confirmation": null,
       "days_fulfillment": null,
-      "days_late_early": null,
-      "on_time_delivery": "Pending",
+      "days_late_early": -16,
+      "on_time_delivery": "On Time",
       "percent_shipping_cost": 0.0
     },
     {
