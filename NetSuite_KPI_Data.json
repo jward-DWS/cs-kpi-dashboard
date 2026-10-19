@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2026-10-18 12:31:26",
+    "last_updated": "2026-10-19 15:24:28",
     "record_count": 1000
   },
   "data": [
@@ -455,6 +455,7 @@
     },
     {
       "links": [],
+      "actual_ship_date": "2026-10-13",
       "on_hold_status": "No",
       "order_total": "4362.79",
       "sales_order_number": "SO7963",
@@ -465,8 +466,8 @@
       "days_order_entry": null,
       "days_order_confirmation": null,
       "days_fulfillment": null,
-      "days_late_early": null,
-      "on_time_delivery": "Pending",
+      "days_late_early": -17,
+      "on_time_delivery": "On Time",
       "percent_shipping_cost": 0.0
     },
     {
@@ -3018,7 +3019,7 @@
       "order_total": "24062",
       "sales_order_number": "SO7807",
       "shipping_method_name": "Will Call",
-      "target_ship_date": "2026-10-14",
+      "target_ship_date": "2026-10-19",
       "transaction_date": "2026-09-22",
       "transaction_id": "944432",
       "days_order_entry": null,
@@ -8819,7 +8820,7 @@
       "po_received_date": "2026-08-11",
       "sales_order_number": "SO7458",
       "shipping_method_name": "Will Call",
-      "target_ship_date": "2026-09-17",
+      "target_ship_date": "2026-10-31",
       "transaction_date": "2026-08-11",
       "transaction_id": "907883",
       "days_order_entry": 0,
