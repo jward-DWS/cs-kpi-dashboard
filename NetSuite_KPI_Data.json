@@ -1,9 +1,90 @@
 {
   "metadata": {
-    "last_updated": "2026-11-06 15:47:54",
+    "last_updated": "2026-11-07 14:47:32",
     "record_count": 1000
   },
   "data": [
+    {
+      "links": [],
+      "on_hold_status": "No",
+      "order_total": "350",
+      "sales_order_number": "SO8121",
+      "shipping_method_name": "Will Call",
+      "target_ship_date": "2026-11-11",
+      "transaction_date": "2026-11-06",
+      "transaction_id": "987482",
+      "days_order_entry": null,
+      "days_order_confirmation": null,
+      "days_fulfillment": null,
+      "days_late_early": null,
+      "on_time_delivery": "Pending",
+      "percent_shipping_cost": 0.0
+    },
+    {
+      "links": [],
+      "actual_ship_date": "2026-11-06",
+      "on_hold_status": "No",
+      "order_total": "265.65",
+      "sales_order_number": "SO8122",
+      "shipping_method_name": "Will Call",
+      "target_ship_date": "2026-11-06",
+      "transaction_date": "2026-11-06",
+      "transaction_id": "987483",
+      "days_order_entry": null,
+      "days_order_confirmation": null,
+      "days_fulfillment": null,
+      "days_late_early": 0,
+      "on_time_delivery": "On Time",
+      "percent_shipping_cost": 0.0
+    },
+    {
+      "links": [],
+      "on_hold_status": "No",
+      "order_total": "2681.49",
+      "sales_order_number": "SO8125",
+      "shipping_method_name": "Customer Carrier",
+      "target_ship_date": "2026-11-16",
+      "transaction_date": "2026-11-06",
+      "transaction_id": "988450",
+      "days_order_entry": null,
+      "days_order_confirmation": null,
+      "days_fulfillment": null,
+      "days_late_early": null,
+      "on_time_delivery": "Pending",
+      "percent_shipping_cost": 0.0
+    },
+    {
+      "links": [],
+      "on_hold_status": "No",
+      "order_total": "31799.41",
+      "sales_order_number": "SO8124",
+      "shipping_method_name": "CC Truck",
+      "target_ship_date": "2026-11-17",
+      "transaction_date": "2026-11-06",
+      "transaction_id": "988007",
+      "days_order_entry": null,
+      "days_order_confirmation": null,
+      "days_fulfillment": null,
+      "days_late_early": null,
+      "on_time_delivery": "Pending",
+      "percent_shipping_cost": 0.0
+    },
+    {
+      "links": [],
+      "on_hold_status": "No",
+      "order_total": "671.58",
+      "sales_order_number": "SO8123",
+      "shipping_method_name": "Numark Transportation-3rd",
+      "target_ship_date": "2026-11-11",
+      "transaction_date": "2026-11-06",
+      "transaction_id": "988006",
+      "days_order_entry": null,
+      "days_order_confirmation": null,
+      "days_fulfillment": null,
+      "days_late_early": null,
+      "on_time_delivery": "Pending",
+      "percent_shipping_cost": 0.0
+    },
     {
       "links": [],
       "on_hold_status": "No",
@@ -122,7 +203,7 @@
       "order_total": "896",
       "sales_order_number": "SO8112",
       "shipping_method_name": "Customer Carrier",
-      "target_ship_date": "2026-11-16",
+      "target_ship_date": "2026-11-09",
       "transaction_date": "2026-11-05",
       "transaction_id": "986810",
       "days_order_entry": null,
@@ -154,7 +235,7 @@
       "order_total": "957.6",
       "sales_order_number": "SO8114",
       "shipping_method_name": "Customer Carrier",
-      "target_ship_date": "2026-11-16",
+      "target_ship_date": "2026-11-11",
       "transaction_date": "2026-11-05",
       "transaction_id": "986814",
       "days_order_entry": null,
@@ -214,6 +295,7 @@
     },
     {
       "links": [],
+      "actual_ship_date": "2026-11-06",
       "on_hold_status": "No",
       "order_total": "67.5",
       "sales_order_number": "SO8103",
@@ -224,8 +306,8 @@
       "days_order_entry": null,
       "days_order_confirmation": null,
       "days_fulfillment": null,
-      "days_late_early": null,
-      "on_time_delivery": "Pending",
+      "days_late_early": 0,
+      "on_time_delivery": "On Time",
       "percent_shipping_cost": 0.0
     },
     {
@@ -262,6 +344,7 @@
     },
     {
       "links": [],
+      "actual_ship_date": "2026-11-05",
       "on_hold_status": "No",
       "order_total": "27.25",
       "sales_order_number": "SO8101",
@@ -272,8 +355,8 @@
       "days_order_entry": null,
       "days_order_confirmation": null,
       "days_fulfillment": null,
-      "days_late_early": null,
-      "on_time_delivery": "Pending",
+      "days_late_early": -7,
+      "on_time_delivery": "On Time",
       "percent_shipping_cost": 0.0
     },
     {
@@ -640,6 +723,7 @@
     },
     {
       "links": [],
+      "actual_ship_date": "2026-11-06",
       "on_hold_status": "No",
       "order_total": "1592.5",
       "sales_order_number": "SO8081",
@@ -650,8 +734,8 @@
       "days_order_entry": null,
       "days_order_confirmation": null,
       "days_fulfillment": null,
-      "days_late_early": null,
-      "on_time_delivery": "Pending",
+      "days_late_early": 0,
+      "on_time_delivery": "On Time",
       "percent_shipping_cost": 0.0
     },
     {
@@ -804,6 +888,7 @@
     },
     {
       "links": [],
+      "actual_ship_date": "2026-11-06",
       "on_hold_status": "No",
       "order_total": "1609.31",
       "sales_order_number": "SO8068",
@@ -814,8 +899,8 @@
       "days_order_entry": null,
       "days_order_confirmation": null,
       "days_fulfillment": null,
-      "days_late_early": null,
-      "on_time_delivery": "Pending",
+      "days_late_early": 0,
+      "on_time_delivery": "On Time",
       "percent_shipping_cost": 0.0
     },
     {
@@ -1004,6 +1089,7 @@
     },
     {
       "links": [],
+      "actual_ship_date": "2026-11-06",
       "on_hold_status": "No",
       "order_total": "395.48",
       "sales_order_number": "SO8052",
@@ -1014,8 +1100,8 @@
       "days_order_entry": null,
       "days_order_confirmation": null,
       "days_fulfillment": null,
-      "days_late_early": null,
-      "on_time_delivery": "Pending",
+      "days_late_early": 0,
+      "on_time_delivery": "On Time",
       "percent_shipping_cost": 0.0
     },
     {
@@ -1041,7 +1127,7 @@
       "order_total": "1260",
       "sales_order_number": "SO8053",
       "shipping_method_name": "Will Call",
-      "target_ship_date": "2026-11-09",
+      "target_ship_date": "2026-11-10",
       "transaction_date": "2026-10-26",
       "transaction_id": "975712",
       "days_order_entry": null,
@@ -1739,7 +1825,7 @@
     {
       "links": [],
       "on_hold_status": "No",
-      "order_total": "0",
+      "order_total": "6118.1",
       "sales_order_number": "SO8011",
       "target_ship_date": "2026-10-21",
       "transaction_date": "2026-10-21",
@@ -1749,7 +1835,7 @@
       "days_fulfillment": null,
       "days_late_early": null,
       "on_time_delivery": "Pending",
-      "percent_shipping_cost": 0
+      "percent_shipping_cost": 0.0
     },
     {
       "links": [],
@@ -1855,6 +1941,7 @@
     },
     {
       "links": [],
+      "actual_ship_date": "2026-11-06",
       "on_hold_status": "No",
       "order_total": "17105.48",
       "sales_order_number": "SO8000",
@@ -1865,8 +1952,8 @@
       "days_order_entry": null,
       "days_order_confirmation": null,
       "days_fulfillment": null,
-      "days_late_early": null,
-      "on_time_delivery": "Pending",
+      "days_late_early": 0,
+      "on_time_delivery": "On Time",
       "percent_shipping_cost": 0.0
     },
     {
@@ -2106,7 +2193,7 @@
     {
       "links": [],
       "on_hold_status": "No",
-      "order_total": "1561.11",
+      "order_total": "1547.01",
       "sales_order_number": "SO7983",
       "shipping_method_name": "Oak Harbor Freight-PPA",
       "target_ship_date": "2026-11-10",
@@ -2309,7 +2396,7 @@
     {
       "links": [],
       "on_hold_status": "No",
-      "order_total": "0",
+      "order_total": "952.94",
       "sales_order_number": "SO7979",
       "target_ship_date": "2026-10-15",
       "transaction_date": "2026-10-15",
@@ -2319,10 +2406,11 @@
       "days_fulfillment": null,
       "days_late_early": null,
       "on_time_delivery": "Pending",
-      "percent_shipping_cost": 0
+      "percent_shipping_cost": 0.0
     },
     {
       "links": [],
+      "actual_ship_date": "2026-11-06",
       "on_hold_status": "No",
       "order_total": "1638.41",
       "sales_order_number": "SO7978",
@@ -2333,8 +2421,8 @@
       "days_order_entry": null,
       "days_order_confirmation": null,
       "days_fulfillment": null,
-      "days_late_early": null,
-      "on_time_delivery": "Pending",
+      "days_late_early": 0,
+      "on_time_delivery": "On Time",
       "percent_shipping_cost": 0.0
     },
     {
@@ -6942,6 +7030,7 @@
       "on_hold_status": "No",
       "order_total": "0",
       "sales_order_number": "SO7693",
+      "shipping_method_name": "Arrive Logistics 3rd Party",
       "target_ship_date": "2026-09-25",
       "transaction_date": "2026-09-04",
       "transaction_id": "930790",
@@ -14346,7 +14435,7 @@
     {
       "links": [],
       "on_hold_status": "No",
-      "order_total": "0",
+      "order_total": "816.39",
       "sales_order_number": "SO7247",
       "shipping_method_name": "Freight Scouts",
       "target_ship_date": "2026-07-21",
@@ -14357,7 +14446,7 @@
       "days_fulfillment": null,
       "days_late_early": null,
       "on_time_delivery": "Pending",
-      "percent_shipping_cost": 0
+      "percent_shipping_cost": 0.0
     },
     {
       "links": [],
@@ -17221,94 +17310,6 @@
       "days_fulfillment": null,
       "days_late_early": 2,
       "on_time_delivery": "Late",
-      "percent_shipping_cost": 0.0
-    },
-    {
-      "links": [],
-      "actual_ship_date": "2026-07-08",
-      "on_hold_status": "No",
-      "order_total": "3600",
-      "sales_order_number": "SO7083",
-      "shipping_method_name": "Will Call",
-      "target_ship_date": "2026-07-08",
-      "transaction_date": "2026-07-06",
-      "transaction_id": "865733",
-      "days_order_entry": null,
-      "days_order_confirmation": null,
-      "days_fulfillment": null,
-      "days_late_early": 0,
-      "on_time_delivery": "On Time",
-      "percent_shipping_cost": 0.0
-    },
-    {
-      "links": [],
-      "actual_ship_date": "2026-07-14",
-      "on_hold_status": "No",
-      "order_total": "4287.91",
-      "po_received_date": "2026-07-06",
-      "sales_order_number": "SO7096",
-      "shipping_method_name": "CC Truck",
-      "target_ship_date": "2026-07-20",
-      "transaction_date": "2026-07-06",
-      "transaction_id": "866803",
-      "days_order_entry": 0,
-      "days_order_confirmation": null,
-      "days_fulfillment": null,
-      "days_late_early": -6,
-      "on_time_delivery": "On Time",
-      "percent_shipping_cost": 0.0
-    },
-    {
-      "links": [],
-      "actual_ship_date": "2026-07-28",
-      "on_hold_status": "No",
-      "order_total": "1004",
-      "sales_order_number": "SO7086",
-      "shipping_method_name": "Will Call",
-      "target_ship_date": "2026-07-27",
-      "transaction_date": "2026-07-06",
-      "transaction_id": "866049",
-      "days_order_entry": null,
-      "days_order_confirmation": null,
-      "days_fulfillment": null,
-      "days_late_early": 1,
-      "on_time_delivery": "Late",
-      "percent_shipping_cost": 0.0
-    },
-    {
-      "links": [],
-      "actual_ship_date": "2026-07-08",
-      "on_hold_status": "No",
-      "order_total": "2028.11",
-      "po_received_date": "2026-07-06",
-      "sales_order_number": "SO7089",
-      "shipping_cost": "264.11",
-      "shipping_method_name": "R&L CARRIERS",
-      "target_ship_date": "2026-07-09",
-      "transaction_date": "2026-07-06",
-      "transaction_id": "866173",
-      "days_order_entry": 0,
-      "days_order_confirmation": null,
-      "days_fulfillment": null,
-      "days_late_early": -1,
-      "on_time_delivery": "On Time",
-      "percent_shipping_cost": 13.02
-    },
-    {
-      "links": [],
-      "on_hold_status": "No",
-      "order_total": "36719.05",
-      "po_received_date": "2026-07-07",
-      "sales_order_number": "SO7098",
-      "shipping_method_name": "JMT Logistics LLC",
-      "target_ship_date": "2026-07-16",
-      "transaction_date": "2026-07-06",
-      "transaction_id": "867017",
-      "days_order_entry": -1,
-      "days_order_confirmation": null,
-      "days_fulfillment": null,
-      "days_late_early": null,
-      "on_time_delivery": "Pending",
       "percent_shipping_cost": 0.0
     }
   ]
